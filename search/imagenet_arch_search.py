@@ -27,24 +27,24 @@ ref_values = {
 }
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--path', type=str, default=None)
+parser.add_argument('--path', type=str, default='/home/gaoyibo/Datasets/cifar-10/')
 parser.add_argument('--gpu', help='gpu available', default='0,1,2,3')
 parser.add_argument('--resume', action='store_true')
 parser.add_argument('--debug', help='freeze the weight parameters', action='store_true')
 parser.add_argument('--manual_seed', default=0, type=int)
 
 """ run config """
-parser.add_argument('--n_epochs', type=int, default=120)
+parser.add_argument('--n_epochs', type=int, default=480)
 parser.add_argument('--init_lr', type=float, default=0.025)
 parser.add_argument('--lr_schedule_type', type=str, default='cosine')
 # lr_schedule_param
 
-parser.add_argument('--dataset', type=str, default='imagenet', choices=['imagenet'])
+parser.add_argument('--dataset', type=str, default='cifar10', choices=['imagenet', 'cifar10'])
 parser.add_argument('--train_batch_size', type=int, default=256)
-parser.add_argument('--test_batch_size', type=int, default=1000)
-parser.add_argument('--valid_size', type=int, default=50000)
+parser.add_argument('--test_batch_size', type=int, default=256)
+parser.add_argument('--valid_size', type=int, default=0.5)
 
-parser.add_argument('--opt_type', type=str, default='sgd', choices=['sgd'])
+parser.add_argument('--opt_type', type=str, default='adam', choices=['sgd'])
 parser.add_argument('--momentum', type=float, default=0.9)  # opt_param
 parser.add_argument('--no_nesterov', action='store_true')  # opt_param
 parser.add_argument('--weight_decay', type=float, default=4e-5)

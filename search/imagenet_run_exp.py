@@ -14,7 +14,7 @@ from run_manager import RunManager
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--path', type=str, default=None)
+parser.add_argument('--path', type=str, default='/home/gaoyibo/Datasets/cifar-10/')
 parser.add_argument('--gpu', help='gpu available', default='0,1,2,3')
 parser.add_argument('--train', action='store_true')
 
@@ -27,12 +27,12 @@ parser.add_argument('--init_lr', type=float, default=0.05)
 parser.add_argument('--lr_schedule_type', type=str, default='cosine')
 # lr_schedule_param
 
-parser.add_argument('--dataset', type=str, default='imagenet', choices=['imagenet'])
+parser.add_argument('--dataset', type=str, default='cifar10', choices=['imagenet'])
 parser.add_argument('--train_batch_size', type=int, default=256)
 parser.add_argument('--test_batch_size', type=int, default=500)
 parser.add_argument('--valid_size', type=int, default=None)
 
-parser.add_argument('--opt_type', type=str, default='sgd', choices=['sgd'])
+parser.add_argument('--opt_type', type=str, default='adam', choices=['sgd'])
 parser.add_argument('--momentum', type=float, default=0.9)  # opt_param
 parser.add_argument('--no_nesterov', action='store_true')  # opt_param
 parser.add_argument('--weight_decay', type=float, default=4e-5)
@@ -94,7 +94,7 @@ if __name__ == '__main__':
         print('\t%s: %s' % (k, v))
 
     # prepare network
-    net_config_path = '%s/net.config' % args.path
+    net_config_path = '%s/learned_net/net.config' % args.path
     if os.path.isfile(net_config_path):
         # load net from file
         from models import get_net_by_name

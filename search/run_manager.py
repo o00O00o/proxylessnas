@@ -88,6 +88,9 @@ class RunConfig:
             if self.dataset == 'imagenet':
                 from data_providers.imagenet import ImagenetDataProvider
                 self._data_provider = ImagenetDataProvider(**self.data_config)
+            elif self.dataset == 'cifar10':
+                from data_providers.cifar10 import Cifar10DataProvider
+                self._data_provider = Cifar10DataProvider()
             else:
                 raise ValueError('do not support: %s' % self.dataset)
         return self._data_provider
@@ -156,7 +159,7 @@ class RunConfig:
                 optimizer = torch.optim.SGD(net_params, self.init_lr, momentum=momentum, nesterov=nesterov,
                                             weight_decay=self.weight_decay)
         else:
-            raise NotImplementedError
+            optimizer = torch.optim.Adam(net_params, lr=1e-3)
         return optimizer
 
 
@@ -190,7 +193,7 @@ class RunManager:
             # self.device = torch.device('cpu')
 
         # net info
-        self.print_net_info(measure_latency)
+        # self.print_net_info(measure_latency)
 
         self.criterion = nn.CrossEntropyLoss()
         if self.run_config.no_decay_keys:

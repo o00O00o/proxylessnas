@@ -230,7 +230,7 @@ class ArchSearchRunManager:
         # test on validation set under train mode
         valid_res = self.run_manager.validate(is_test=False, use_train_mode=True, return_top5=True)
         # flops of chosen network
-        flops = self.run_manager.net_flops()
+        # flops = self.run_manager.net_flops()
         # measure latencies of chosen op
         if self.arch_search_config.target_hardware in [None, 'flops']:
             latency = 0
@@ -240,7 +240,7 @@ class ArchSearchRunManager:
             )
         # unused modules back
         self.net.unused_modules_back()
-        return valid_res, flops, latency
+        return valid_res, 111, latency
 
     def warm_up(self, warmup_epochs=25):
         lr_max = 0.05
